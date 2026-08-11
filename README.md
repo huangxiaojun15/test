@@ -72,3 +72,17 @@
  ],
  "execution_plan_id": ""
 }
+
+  base-c-test-acc-4-npu-a3:
+    name: base-c-test-acc-4-npu-a3
+    needs: [ check-changes, pr-gate, set-image-config ]
+    if: ${{ !failure() && !cancelled() && needs.check-changes.outputs.main_package == 'true' }}
+    uses: ./.github/workflows/_npu-single-node-test-stage.yml
+    with:
+      runner: linux-aarch64-a3-4-
+      test_type: 'accuracy'
+      test_suite: base-c-test-acc-4-npu-a3
+      image: ${{ needs.set-image-config.outputs.CANN_image_a3 }}
+      install_sglang_deps: true
+      device_type_for_deps: 'a3'
+
