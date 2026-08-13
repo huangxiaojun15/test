@@ -86,3 +86,4 @@
       install_sglang_deps: true
       device_type_for_deps: 'a3'
 
+https://gitcode.com/Ascend/pytorch/releases/download/v26.1.0-pytorch2.10.0/torch_npu-2.10.0.post4-cp312-cp312-manylinux_2_28_$arch.whl
