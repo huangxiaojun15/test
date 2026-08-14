@@ -87,3 +87,5 @@
       device_type_for_deps: 'a3'
 
 https://gitcode.com/Ascend/pytorch/releases/download/v26.1.0-pytorch2.10.0/torch_npu-2.10.0.post4-cp312-cp312-manylinux_2_28_$arch.whl
+
+npu_hc_post\inplace_partial_rotary_mul\compressor\indexer_compress_epilog\npu_quant_lightning_indexer_metadata\npu_quant_lightning_indexer\npu_kv_quant_sparse_attn_sharedkv_metadata\npu_kv_quant_sparse_attn_sharedkv\npu_moe_gating_top_k
