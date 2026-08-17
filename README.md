@@ -89,3 +89,18 @@
 https://gitcode.com/Ascend/pytorch/releases/download/v26.1.0-pytorch2.10.0/torch_npu-2.10.0.post4-cp312-cp312-manylinux_2_28_$arch.whl
 
 npu_hc_post\inplace_partial_rotary_mul\compressor\indexer_compress_epilog\npu_quant_lightning_indexer_metadata\npu_quant_lightning_indexer\npu_kv_quant_sparse_attn_sharedkv_metadata\npu_kv_quant_sparse_attn_sharedkv\npu_moe_gating_top_k
+
+[INFO] [real_stage:official_devcloud_cloudBuild] : 该步骤开始执行
+[INFO] [real_stage:official_devcloud_cloudBuild] : [frame] start to send status data to service.
+[INFO]  : Start to execute task.
+[INFO] [real_stage:official_devcloud_cloudBuild] : [frame] finish to save status data to service.
+[INFO]  : Task execution completed.
+[INFO] [real_stage:official_devcloud_cloudBuild] : [frame] start to send status data to service.
+[INFO]  : Start to get the task status.
+[INFO] [real_stage:official_devcloud_cloudBuild] : [frame] finish to save status data to service.
+[INFO]  : Finish getting this task status.
+[INFO]  : Start to get the task status.
+[ERROR] [real_stage:official_devcloud_cloudBuild] : [frame] query step status with error.
+[ERROR] [real_stage:official_devcloud_cloudBuild] : 错误信息: DEV-CODECI-35002, 构建任务执行失败!
+[INFO]  : 开始: Get output to CloudBuild Task!
+
