@@ -104,3 +104,4 @@ npu_hc_post\inplace_partial_rotary_mul\compressor\indexer_compress_epilog\npu_qu
 [ERROR] [real_stage:official_devcloud_cloudBuild] : 错误信息: DEV-CODECI-35002, 构建任务执行失败!
 [INFO]  : 开始: Get output to CloudBuild Task!
 
+echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> ~/.bashrc
