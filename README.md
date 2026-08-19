@@ -107,3 +107,6 @@ npu_hc_post\inplace_partial_rotary_mul\compressor\indexer_compress_epilog\npu_qu
 echo "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib" >> ~/.bashrc
 
 https://devcloud.cn-north-4.huaweicloud.com/cicd/project/1e20b309fcb34b00a0043a87e461c95a/pipeline/modify/8887af89bd814241b11abd624492da36?from=project&v=1
+
+source /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/bin/set_env.bash
+source /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/custom_transformer/bin/set_env.bash
