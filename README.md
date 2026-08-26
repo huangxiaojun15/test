@@ -30,4 +30,4 @@ docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-tor
 
 docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-debian12-py3.11
 
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-openeuler24.03-py3.11-arm64
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-openeuler24.03-py3.11
