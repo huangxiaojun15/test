@@ -12,3 +12,22 @@ MemoryFabric 自动编译了 cann-hybm-compat.tar.gz这个软件包但是没有�
 https://github.com/Ascend/sglang/blob/gh-pages/docker/npu2-a3.Dockerfile
 
 https://github.com/Ascend/sglang/actions/runs/31708966118
+
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-a3-ubuntu24.04-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-ubuntu24.04-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-ubuntu24.04-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-debian12-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-a3-openeuler24.03-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-a3-debian12-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-openeuler24.03-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-debian12-py3.11
+
+docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-openeuler24.03-py3.11-arm64
