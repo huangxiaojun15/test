@@ -31,3 +31,20 @@ docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-tor
 docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-debian12-py3.11
 
 docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-openeuler24.03-py3.11
+
+
+https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-x64.tar.gz
+https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-arm64.tar.gz
+
+swr.cn-north-4.myhuaweicloud.com/hw-ascend/manylinux_2_28_x86:latest  
+swr.cn-north-4.myhuaweicloud.com/hw-ascend/triton_manylinux_2_28_arm:v2.0
+
+1、安装 llvm
+2、安装python的so库。环境上已安装python，但无对应so库
+
+3、安装cann
+
+cann_9.1.0-beta.1
+
+https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-x64.tar.gz
+https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-arm64.tar.gz
