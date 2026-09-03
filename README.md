@@ -48,3 +48,9 @@ cann_9.1.0-beta.1
 
 https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-x64.tar.gz
 https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-arm64.tar.gz
+
+
+
+https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=6ebn9590-1b02-4db3-acb1-b0603037d603
+账号申请表：
+https://acnzfe9bkhyg.feishu.cn/share/base/form/shrcnfyAx2jT3ZahGwWai0N6Xtc
