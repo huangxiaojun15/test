@@ -1,0 +1,118 @@
+def buildConfigs = [
+    [name: 'arm-python310-main', arch: 'aarch64', python: 'cp310-cp310', label: 'triton_arm',  llvm: 'llvm-ta3.6-arm64'],
+    [name: 'arm-python311-main',  arch: 'aarch64', python: 'cp311-cp311', label: 'triton_arm',  llvm: 'llvm-ta3.6-arm64'],
+    [name: 'arm-python312-main', arch: 'aarch64', python: 'cp312-cp312', label: 'triton_arm',  llvm: 'llvm-ta3.6-arm64'],
+    [name: 'arm-python313-main',  arch: 'aarch64', python: 'cp313-cp313', label: 'triton_arm',  llvm: 'llvm-ta3.6-arm64'],
+    [name: 'x86-python310-main', arch: 'x86', python: 'cp310-cp310', label: 'triton_x86',  llvm: 'llvm-ta3.6-x64'],
+    [name: 'x86-python311-main',  arch: 'x86', python: 'cp311-cp311', label: 'triton_x86',  llvm: 'llvm-ta3.6-x64'],
+    [name: 'x86-python312-main', arch: 'x86', python: 'cp312-cp312', label: 'triton_x86',  llvm: 'llvm-ta3.6-x64'],
+    [name: 'x86-python313-main', arch: 'x86', python: 'cp313-cp313', label: 'triton_x86',  llvm: 'llvm-ta3.6-x64']
+]
+properties([
+    parameters([
+        string(name: 'npuir_version', defaultValue: 'NPU-IR-A3A5-innersource 1.2.0', description: 'NPUIR版本号'),
+        string(name: 'CMC_Triton', defaultValue: 'Triton-Ascend-Innersource 26.2.0', description: 'triton版本号'),
+        string(name: 'jobName', defaultValue: '', description: 'pkg')
+    ])
+])
+
+// 获取npuir版本
+timestamps {
+    node('triton_arm') {
+        stage('prebuild') {
+            try {
+                    sh """
+                        set -e
+                        echo "#######get triton-ascend code########"
+                        set +x
+                        git config --global http.sslVerify false
+                        export GIT_SSL_NO_VERIFY=true
+                        export http_proxy=http://p_atlas:proxy%40123@hkgpqwg00206.huawei.com:8080
+                        export https_proxy=http://p_atlas:proxy%40123@hkgpqwg00206.huawei.com:8080
+                        export no_proxy=127.0.0.1,*.huawei.com,localhost,local,.local
+                        git config --global http.postBuffer 524288000
+                        set -x
+                        # get triton-ascend code
+                        rm -rf shmem
+                        git clone -b release/v1.6.0 https://gitcode.com/cann/shmem.git shmem --depth 1
+                        cd shmem
+                        mkdir -p 3rdparty
+                        git clone --branch v3.11.3 --depth 1 https://gitcode.com/GitHub_Trending/js/json.git 3rdparty/json
+                        unset http_proxy
+                        unset https_proxy
+                        unset no_proxy
+                        cd $WORKSPACE/
+                        tar -zcf shmem_code.tar.gz shmem/
+                    """
+                    sh """
+                        echo "#######upload triton-ascend code########"
+                        set -xe
+                        folder_tmp="${params.jobName}"
+                        folder="\${folder_tmp: -14}"
+                        echo "\${folder}" > triton_folder.txt
+                        artget push "${params.CMC_Triton}" --offering "Triton Performance Optimization" -ru inner -rp "\${folder}" -ap "./shmem_code.tar.gz" -user "p_OckCI" -pwd "encryption:ETMsDgAAAYA7af+XABRBRVMvQ0JDL1BLQ1M1UGFkZGluZwCAABAAEJBiK1TiSbra9ngl+DLBe0QAAAAgYTU2Tt2GdcOS8nyU05sj8U0irLfK3CfgU6f4/7n6ohYAFJHxhHudG1F2Sf+r08BDVbQL9Bld"
+                    """
+                    stash name: 'triton_folder-data', includes: 'triton_folder.txt'
+                } catch (Exception e) {
+                    echo "get npuir folder fail, message: ${e.message}"
+                    currentBuild.result = 'FAILURE'
+                    throw e
+                }
+        }
+    }
+    def parallelTasks = [:]
+
+    buildConfigs.each { config ->
+        parallelTasks[config.name] = {
+            node(config.label) {
+                stage(config.name) {
+                    try {
+                        unstash 'triton_folder-data'
+                        def triton_folder = readFile('triton_folder.txt').trim()
+                        sh """
+                            set -e
+                            echo "#######get triton-ascend code########"
+                            artget pull "${params.CMC_Triton}" --offering "Triton Performance Optimization" -ru inner -rp "${triton_folder}/shmem_code.tar.gz" -ap "./" -user "p_OckCI" -pwd "encryption:ETMsDgAAAYA7af+XABRBRVMvQ0JDL1BLQ1M1UGFkZGluZwCAABAAEJBiK1TiSbra9ngl+DLBe0QAAAAgYTU2Tt2GdcOS8nyU05sj8U0irLfK3CfgU6f4/7n6ohYAFJHxhHudG1F2Sf+r08BDVbQL9Bld"
+                            ls -al ./
+                            tar -zxf shmem_code.tar.gz
+                        """
+                        sh """
+                            set -e
+                            echo "#######start triton-ascend build########"
+                            echo "remote_storage = http://7.218.30.174/cache/" >> /root/.ccache/ccache.conf
+                            echo "remote_only = true" >> /root/.ccache/ccache.conf
+                            echo "remote_timeout = 30" >> /root/.ccache/ccache.conf
+                            echo "compression = true" >> /root/.ccache/ccache.conf
+                            echo "compression_level = 6" >> /root/.ccache/ccache.conf
+                            echo "namespace = ${config.name}" >> /root/.ccache/ccache.conf
+                            cat /root/.ccache/ccache.conf
+                            export CXX=/usr/bin/clang++-15
+                            export CC=/usr/bin/clang-15
+                            cd shmem
+                            export PYTHON_HOME="/opt/python/${config.python}"
+                            export CMAKE_PREFIX_PATH=\$PYTHON_HOME
+                            export LD_LIBRARY_PATH=\$PYTHON_HOME/lib
+                            export PATH=\$PYTHON_HOME/bin:\$PATH
+                            source /workspace/CANN/cann_package/cann_9.1.0-beta.1/ascend-toolkit/set_env.sh
+                            export VERSION=1.6.0
+                            bash scripts/build.sh -python_extension -soc_type Ascend950
+                            ccache -s
+                            mkdir -p $WORKSPACE/shmem_pkg
+                            cp -u dist/*.whl $WORKSPACE/shmem_pkg
+                        """
+                        sh """
+                            echo "#######upload shmem pkg########"
+                            set -e
+                            artget push "${params.CMC_Triton}" --offering "Triton Performance Optimization" -ru software -rp "${triton_folder}" -ap "./shmem_pkg" -user "p_OckCI" -pwd "encryption:ETMsDgAAAYA7af+XABRBRVMvQ0JDL1BLQ1M1UGFkZGluZwCAABAAEJBiK1TiSbra9ngl+DLBe0QAAAAgYTU2Tt2GdcOS8nyU05sj8U0irLfK3CfgU6f4/7n6ohYAFJHxhHudG1F2Sf+r08BDVbQL9Bld"
+                        """
+                    } catch (Exception e) {
+                        echo "build ${config.name} fail, message: ${e.message}"
+                        currentBuild.result = 'FAILURE'
+                    }
+                }
+            }
+        }
+    }
+
+    parallel parallelTasks
+}
