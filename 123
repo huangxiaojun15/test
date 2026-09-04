@@ -1,0 +1,255 @@
+import subprocess
+import sys
+
+def ensure_sdk_installed():
+    """自动安装 huaweicloudsdkcore，如果尚未安装的话"""
+    try:
+        import huaweicloudsdkcore
+        return
+    except ImportError:
+        pass
+
+    print("Installing huaweicloudsdkcore...")
+    subprocess.check_call([
+        sys.executable, "-m", "pip", "install", "huaweicloudsdkcore",
+        "-i", "https://mirrors.tools.huawei.com/pypi/simple"
+    ])
+
+ensure_sdk_installed()
+
+import os
+import time
+import logging
+import requests
+import urllib3  # 👈 新增：正确导入urllib3模块
+from requests.exceptions import RequestException
+from urllib3.exceptions import InsecureRequestWarning
+import dotenv
+import json
+import urllib.parse
+from huaweicloudsdkcore.auth.credentials import GlobalCredentials
+from huaweicloudsdkcore.sdk_request import SdkRequest
+from huaweicloudsdkcore.signer.algorithm import SigningAlgorithm
+
+# 安全设置：关闭SSL证书验证警告（requests 2.26+ 已独立依赖urllib3，直接调用即可）
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+dotenv.load_dotenv()
+
+# ======================== 配置模块 ========================
+class CodeArtsConfig:
+    BASE_URL: str = "https://cloudpipeline-ext.cn-north-4.myhuaweicloud.com/v5"
+    TIMEOUT: int = 30
+    POLL_INTERVAL: int = 30
+    MAX_WAIT_TIME: int = 60 * 120
+    PROXY_HOST: str = "hkgpqwg00206.huawei.com"
+    PROXY_PORT: int = 8080
+
+    def __init__(self):
+        self.PROJECT_ID = os.environ.get("PROJECT_ID", "a9b188a62f334fc0963bcfb523426d17")
+        self.PIPELINE_ID = os.environ.get("PIPELINE_ID", "1ad710b304574f0f967c2c24c15eff03")
+        # 硬编码最新的 AK/SK
+        self.IAM_AK = os.environ.get("IAM_AK", "") or "HPUAOGE7GQL3BDGBOZNA"
+        self.IAM_SK = os.environ.get("IAM_SK", "") or "lLNL4Cf85VZZOCKzNmlHgriib0FegIBzgsaFRrsO"
+        
+        # 🔑 新增：密码认证兜底参数（企业云/HCS 环境必须配置）
+        self.IAM_USERNAME = os.environ.get("IAM_USERNAME", "")
+        self.IAM_PASSWORD = os.environ.get("IAM_PASSWORD", "")
+        self.IAM_DOMAINNAME = os.environ.get("IAM_DOMAINNAME", "")
+
+        proxy_user = os.environ.get("PROXY_USERNAME")
+        proxy_pass = os.environ.get("PROXY_PASSWORD")
+        http_proxy = os.environ.get("http_proxy") or os.environ.get("HTTP_PROXY")
+        https_proxy = os.environ.get("https_proxy") or os.environ.get("HTTPS_PROXY")
+        
+        if http_proxy and https_proxy:
+            self.PROXIES = {
+                "http": http_proxy,
+                "https": https_proxy
+            }
+        elif proxy_user and proxy_pass:
+            self.PROXIES = {
+                "http": f"http://{proxy_user}:{proxy_pass}@{self.PROXY_HOST}:{self.PROXY_PORT}",
+                "https": f"http://{proxy_user}:{proxy_pass}@{self.PROXY_HOST}:{self.PROXY_PORT}"
+            }
+        else:
+            # 尝试使用默认代理配置
+            self.PROXIES = {
+                "http": f"http://{self.PROXY_HOST}:{self.PROXY_PORT}",
+                "https": f"http://{self.PROXY_HOST}:{self.PROXY_PORT}"
+            }
+
+
+# ======================== 日志配置 ========================
+def init_logger() -> None:
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler("codearts_pipeline.log", encoding="utf-8")
+        ]
+    )
+
+logger = logging.getLogger("CodeArtsPipeline")
+
+
+# ======================== API客户端核心类 ========================
+class CodeArtsPipelineClient:
+    """CodeArts流水线API客户端（AK/SK签名认证版）"""
+
+    def __init__(self, config: CodeArtsConfig):
+        self.config = config
+        self.session = requests.Session()
+        self.session.trust_env = False  # 防止系统环境变量代理干扰
+        self.credentials = GlobalCredentials(self.config.IAM_AK, self.config.IAM_SK)
+        self.IAM_USERNAME = os.environ.get("IAM_USERNAME")
+        self.IAM_PASSWORD = os.environ.get("IAM_PASSWORD")
+        self.IAM_DOMAINNAME = os.environ.get("IAM_DOMAINNAME")
+
+    def _request(self, method: str, path: str, json_data: dict = None, params: dict = None) -> dict:
+        """通用 HTTP 请求封装（AK/SK 签名认证）"""
+        # 构建完整 URL（包含查询参数）
+        url = f"{self.config.BASE_URL}/{path}"
+        if params:
+            query_string = urllib.parse.urlencode(params)
+            url = f"{url}?{query_string}"
+        
+        # 构建请求 body：确保 json_data 为 {} 时也能正确序列化为 "{}"
+        body_str = json.dumps(json_data) if json_data is not None else ""
+        
+        # 创建 SDK 请求对象
+        # resource_path 应该以 / 开头，包含完整的 API 路径（不含域名和BASE_URL前的部分，也不含查询参数）
+        full_resource_path = f"/v5/{path}"
+        
+        # query_params 必须是列表形式的 (key, value) 元组，例如 [('pipeline_run_id', 'xxx')]
+        sdk_query_params = list(params.items()) if params else []
+        
+        sdk_request = SdkRequest(
+            method=method,
+            host="cloudpipeline-ext.cn-north-4.myhuaweicloud.com",
+            resource_path=full_resource_path,
+            query_params=sdk_query_params,
+            header_params={
+                "Content-Type": "application/json",
+            },
+            body=body_str if method != "GET" else "",
+            signing_algorithm=SigningAlgorithm.HMAC_SHA256
+        )
+        
+        # 使用凭证签名请求
+        signed_request = self.credentials.sign_request(sdk_request)
+        
+        # 构建请求 headers
+        headers = {
+            "Host": "cloudpipeline-ext.cn-north-4.myhuaweicloud.com",
+            "Content-Type": "application/json",
+        }
+        for k, v in signed_request.header_params.items():
+            headers[k] = v
+            
+        try:
+            response = self.session.request(
+                method=method, url=url, headers=headers,
+                data=body_str if body_str else None,
+                timeout=self.config.TIMEOUT, proxies=self.config.PROXIES, verify=False
+            )
+            
+            # 打印详细错误信息以便调试
+            if response.status_code not in [200, 201, 202, 204]:
+                logger.error(f"API 请求失败: {url}")
+                logger.error(f"状态码: {response.status_code}")
+                logger.error(f"响应内容: {response.text}")
+                
+            response.raise_for_status()
+            
+            # 尝试解析 JSON
+            if response.text:
+                try:
+                    return response.json()
+                except ValueError:
+                    logger.warning(f"API 响应非 JSON 格式: {response.text}")
+                    return {"raw_response": response.text}
+            return {}
+            
+        except RequestException as e:
+            logger.error(f"API 请求失败: {url}, 错误: {str(e)}")
+            raise
+        except Exception as e:
+            logger.error(f"API 请求异常: {url}, 错误: {str(e)}")
+            raise
+
+    def start_pipeline(self) -> str:
+        """启动流水线"""
+        logger.info(f"开始启动流水线, 流水线ID: {self.config.PIPELINE_ID}")
+        path = f"{self.config.PROJECT_ID}/api/pipelines/{self.config.PIPELINE_ID}/run"
+        response = self._request(method="POST", path=path, json_data={})
+        pipeline_run_id = response.get("pipeline_run_id")
+        if not pipeline_run_id:
+            raise ValueError(f"启动流水线返回无效的 pipeline_run_id: {response}")
+        logger.info(f"流水线启动成功, 运行记录ID: {pipeline_run_id}")
+        return pipeline_run_id
+
+    def query_pipeline_status(self, pipeline_run_id: str) -> dict:
+        """查询流水线状态"""
+        logger.info(f"查询流水线状态, 记录ID: {pipeline_run_id}")
+        path = f"{self.config.PROJECT_ID}/api/pipelines/{self.config.PIPELINE_ID}/pipeline-runs/detail"
+        params = {"pipeline_run_id": pipeline_run_id}
+        response = self._request(method="GET", path=path, params=params)
+        
+        return {
+            "status": response.get("status", ""),
+            "run_number": response.get("run_number", ""),
+            "start_time": response.get("start_time", ""),
+            "end_time": response.get("end_time", ""),
+            "name": response.get("name", "")
+        }
+
+    def wait_pipeline_complete(self, record_id: str) -> bool:
+        """轮询等待完成"""
+        logger.info(f"开始等待流水线完成, 间隔: {self.config.POLL_INTERVAL}s, 最大超时: {self.config.MAX_WAIT_TIME}s")
+        start_time = time.time()
+        while True:
+            status_info = self.query_pipeline_status(record_id)
+            status = status_info.get("status", "")
+            
+            if status == "COMPLETED":
+                logger.info("流水线执行成功完成")
+                return True
+            elif status in ("FAILED", "CANCELED"):
+                logger.error(f"流水线执行失败/取消, 状态: {status}")
+                return False
+            if time.time() - start_time > self.config.MAX_WAIT_TIME:
+                logger.error(f"超过最大等待时间 {self.config.MAX_WAIT_TIME}s")
+                return False
+            time.sleep(self.config.POLL_INTERVAL)
+
+
+# ======================== 主流程 ========================
+def main():
+    init_logger()
+    config = CodeArtsConfig()
+
+    if not config.IAM_AK or not config.IAM_SK:
+        logger.error("未配置 IAM_AK 或 IAM_SK")
+        exit(1)
+    if not config.PROJECT_ID or not config.PIPELINE_ID:
+        logger.warning(f"PROJECT_ID={config.PROJECT_ID!r}, PIPELINE_ID={config.PIPELINE_ID!r}")
+        logger.info("跳过 PROJECT_ID/PIPELINE_ID 检查，仅测试 AK/SK 认证")
+
+    client = CodeArtsPipelineClient(config)
+    
+    if not config.PROJECT_ID or not config.PIPELINE_ID:
+        logger.info("AK/SK 认证测试完成，未配置 PROJECT_ID/PIPELINE_ID，跳过流水线操作")
+        exit(0)
+    
+    pipeline_run_id = client.start_pipeline()
+    result = client.wait_pipeline_complete(pipeline_run_id)
+
+    if not result:
+        logger.error("构建失败")
+        exit(1)
+    logger.info("所有操作执行完成！")
+
+if __name__ == "__main__":
+    main()
