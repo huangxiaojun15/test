@@ -54,3 +54,5 @@ https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-
 https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=6ebn9590-1b02-4db3-acb1-b0603037d603
 账号申请表：
 https://acnzfe9bkhyg.feishu.cn/share/base/form/shrcnfyAx2jT3ZahGwWai0N6Xtc
+
+https://github.com/Ascend/sglang/actions/runs/33950258884/job/101263574921?pr=1184
