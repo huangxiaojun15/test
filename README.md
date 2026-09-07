@@ -61,3 +61,5 @@ https://github.com/Ascend/sglang/actions/runs/34075167574/job/101599761299?pr=11
 
 
 https://github.com/Ascend/sglang/actions/runs/34091298462/job/101645160228?pr=1184
+
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/ascend-triton-open/cann/latest/Ascend-cann-toolkit_9.2.0_linux-x86_64.run
