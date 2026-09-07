@@ -58,3 +58,6 @@ https://acnzfe9bkhyg.feishu.cn/share/base/form/shrcnfyAx2jT3ZahGwWai0N6Xtc
 https://github.com/Ascend/sglang/actions/runs/33950258884/job/101263574921?pr=1184
 
 https://github.com/Ascend/sglang/actions/runs/34075167574/job/101599761299?pr=1184
+
+
+https://github.com/Ascend/sglang/actions/runs/34091298462/job/101645160228?pr=1184
