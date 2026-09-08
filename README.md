@@ -66,3 +66,6 @@ https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/ascend-triton-open/c
 
 
 https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com/ta/triton_ascend-3.2.2-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl 
+
+
+84862a00f0e64923aa8b87ca12902147
