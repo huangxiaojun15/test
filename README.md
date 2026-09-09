@@ -69,3 +69,5 @@ https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com/ta/triton_ascend-3.2.2-cp3
 
 
 84862a00f0e64923aa8b87ca12902147
+
+docker login -u='ascend+ascend_bot' -p='' quay.io
