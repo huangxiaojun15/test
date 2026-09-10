@@ -71,3 +71,6 @@ https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com/ta/triton_ascend-3.2.2-cp3
 84862a00f0e64923aa8b87ca12902147
 
 docker login -u='ascend+ascend_bot' -p='' quay.io
+
+
+obs://ascend-cann-open/Triton_Innersource/inductor/20260909223638/torch_npu-2.10.0.post5.dev20260909-cp310-cp310-manylinux_2_28_aarch64.whl
