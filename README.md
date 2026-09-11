@@ -1,76 +1,24 @@
-MemoryFabric 自动编译了 cann-hybm-compat.tar.gz这个软件包但是没有有效签名，编译的时候报错了
-source /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/customize/bin/set_env.bash
-source /usr/local/Ascend/ascend-toolkit/latest/opp/vendors/custom_transformer/bin/set_env.bash
-source /usr/local/Ascend/ascend-toolkit/latest/set_env.sh
-source /usr/local/Ascend/nnal/atb/set_env.sh
+ 基于cann9.1 A5 dockerfile
+1、sglang代码：
+2、mf编译安装：
+https://gitcode.com/victor7wang/memfabric_hybrid/tree/br_v4.1_a5 
+bash script/build.sh
+./memfabric_hybrid-1.2.1_linux_aarch64.run --install
+source /usr/local/memfabric_hybrid/set_env.sh
+3、custom ops安装：
+wget https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com:443/dsv41/cann-ops-transformer-custom_linux-aarch64.run?AccessKeyId=HPUAXT4YM0U8JNTERLST&Expires=1789680150&Signature=nIu2UpZryzkP4VVHxl6sWWHiTq8%3D
+安装run包
+4、tilelang包安装：
+https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com:443/dsv41/tilelang-0.1.2%2Bubuntu.22.4.npuir-cp312-cp312-linux_aarch64.whl?AccessKeyId=HPUAXT4YM0U8JNTERLST&Expires=1789681639&Signature=n/bGuUSIGPa7OGPpkRS%2B54h3lfA%3D
+pip install xx
 
 
-石荆山
-[图片]
-MemoryFabric 自动编译了 cann-hybm-compat.tar.gz这个软件包但是没有有效签名，编译的时候报错了
-当前导入MemoryFabric包后会自动编译并注册未签名的 cann-hybm-compat.tar.gz，设备开启签名校验后，在 torch.npu.set_device() 阶段报 E30009 Package_Error_Verify_Package，导致 TsdOpen failed。在移除了这个包并恢复 ascend_package_load.ini 后 NPU 才可以恢复。现在A5适配PD分离场景需要提供同版本已签名的 HYBM AICPU 包，或提供官方支持的签名安装方案/完整镜像
-https://github.com/Ascend/sglang/blob/gh-pages/docker/npu2-a3.Dockerfile
-
-https://github.com/Ascend/sglang/actions/runs/31708966118
+软文内容：
+sglang + engram offload + Triton + tilelang
 
 
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-a3-ubuntu24.04-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-ubuntu24.04-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-ubuntu24.04-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-debian12-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-a3-openeuler24.03-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-a3-debian12-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-openeuler24.03-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-910b-debian12-py3.11
-
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.2.2-cann9.1.0-torch_npu2.7.1.post8-950-openeuler24.03-py3.11
-
-
-https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-x64.tar.gz
-https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-arm64.tar.gz
-
-swr.cn-north-4.myhuaweicloud.com/hw-ascend/manylinux_2_28_x86:latest  
-swr.cn-north-4.myhuaweicloud.com/hw-ascend/triton_manylinux_2_28_arm:v2.0
-
-1、安装 llvm
-2、安装python的so库。环境上已安装python，但无对应so库
-
-3、安装cann
-
-cann_9.1.0-beta.1
-
-https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-x64.tar.gz
-https://triton-ascend-artifacts.obs.myhuaweicloud.com/llvm-builds/llvm-f6ded0be-4ca23101-ubuntu-arm64.tar.gz
-
-
-
-https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=6ebn9590-1b02-4db3-acb1-b0603037d603
-账号申请表：
-https://acnzfe9bkhyg.feishu.cn/share/base/form/shrcnfyAx2jT3ZahGwWai0N6Xtc
-
-https://github.com/Ascend/sglang/actions/runs/33950258884/job/101263574921?pr=1184
-
-https://github.com/Ascend/sglang/actions/runs/34075167574/job/101599761299?pr=1184
-
-
-https://github.com/Ascend/sglang/actions/runs/34091298462/job/101645160228?pr=1184
-
-https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/ascend-triton-open/cann/latest/Ascend-cann-toolkit_9.2.0_linux-x86_64.run
-
-
-https://sglang-ascend.obs.cn-east-3.myhuaweicloud.com/ta/triton_ascend-3.2.2-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl 
-
-
-84862a00f0e64923aa8b87ca12902147
-
-docker login -u='ascend+ascend_bot' -p='' quay.io
-
-
-obs://ascend-cann-open/Triton_Innersource/inductor/20260909223638/torch_npu-2.10.0.post5.dev20260909-cp310-cp310-manylinux_2_28_aarch64.whl
+https://github.com/sgl-project/sglang/pull/38950
+雷学伟 00502295 2026-09-11 06:11
+张春立
+https://github.com/sgl-project/sglang/pull/38950
+sgl代码地址
