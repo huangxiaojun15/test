@@ -22,3 +22,5 @@ https://github.com/sgl-project/sglang/pull/38950
 张春立
 https://github.com/sgl-project/sglang/pull/38950
 sgl代码地址
+
+swr.cn-southwest-2.myhuaweicloud.com/base_image/dockerhub/lmsysorg/sglang:cann9.1.0-950-glm5.2-950
