@@ -30,3 +30,5 @@ swr.cn-southwest-2.myhuaweicloud.com/base_image/dockerhub/lmsysorg/sglang:cann9.
 
 哈喽 之前的镜像不是用torch_npu 2.10.0 post4版本嘛 那个版本采profiling会踩内存 现在pta发了新的包 镜像得换一下torch_npu的包
 pip install torch-npu==2.10.0.post6 --extra-index-url https://ascend.devcloud.huaweicloud.com/pypi/simple/
+
+swr.cn-north-4.myhuaweicloud.com/ubscore/soe-lcov:1.0
