@@ -23,4 +23,10 @@ https://github.com/sgl-project/sglang/pull/38950
 https://github.com/sgl-project/sglang/pull/38950
 sgl代码地址
 
-swr.cn-southwest-2.myhuaweicloud.com/base_image/dockerhub/lmsysorg/sglang:cann9.1.0-950-glm5.2-950
+swr.cn-southwest-2.myhuaweicloud.com/base_image/dockerhub/lmsysorg/sglang:cann9.1.0-950-glm5.2-
+
+
+
+
+哈喽 之前的镜像不是用torch_npu 2.10.0 post4版本嘛 那个版本采profiling会踩内存 现在pta发了新的包 镜像得换一下torch_npu的包
+pip install torch-npu==2.10.0.post6 --extra-index-url https://ascend.devcloud.huaweicloud.com/pypi/simple/
