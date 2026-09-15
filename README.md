@@ -32,3 +32,6 @@ swr.cn-southwest-2.myhuaweicloud.com/base_image/dockerhub/lmsysorg/sglang:cann9.
 pip install torch-npu==2.10.0.post6 --extra-index-url https://ascend.devcloud.huaweicloud.com/pypi/simple/
 
 swr.cn-north-4.myhuaweicloud.com/ubscore/soe-lcov:1.0
+
+
+https://computing-ttfhw.github.io/ttfhw-verify-portal/#/repo/ubs-comm
