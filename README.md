@@ -266,3 +266,6 @@ ENTRYPOINT ["/bin/bash", "-c", "\
     source /usr/local/Ascend/ascend-toolkit/set_env.sh && \
     bash /etc/profile.d/copyright.sh && \
     exec \"$@\"", "--"]
+
+
+https://devcloud.cn-north-4.huaweicloud.com/cicd/project/78e1e0c2148d4da1b5b21a6d159c9a31/pipeline/history/9a4886d40e544cecb7da63c9597490a6?from=out-project&v=1****
