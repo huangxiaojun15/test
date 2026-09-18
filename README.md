@@ -23,3 +23,8 @@ https://sglang-npu.obs.cn-southwest-2.myhuaweicloud.com:443/memfabric/1.2.1/memf
 AK-SK = C:\Users\h60130221\Desktop\重要文件
 镜像地址 = https://console.huaweicloud.com/swr/?locale=zh-cn&agencyId=019fdb2f844b7dd290905f0bdac6eb08&region=cn-north-4#/swr/warehouse/list/private
 代码托管 = https://devcloud.cn-north-4.huaweicloud.com/codehub/project/78e1e0c2148d4da1b5b21a6d159c9a31/codehub/3067807/home?ref=master&filePath=triton
+
+
+#TTFHW
+TTFHW整改 = https://gitcode.com/TTFHVV/ttfhw-skills/blob/main/ttfhw-verify-smart/SKILL.md
+统计面板 = https://computing-ttfhw.github.io/ttfhw-verify-portal/
