@@ -31,3 +31,4 @@ TTFHW整改 = https://gitcode.com/TTFHVV/ttfhw-skills/blob/main/ttfhw-verify-sma
 
 https://github.com/sgl-project/sglang/actions/runs/35252337403/job/105503208440?pr=35958
 https://github.com/sgl-project/sglang/actions/runs/35296721294/workflow?pr=36187
+swr.cn-north-4.myhuaweicloud.com/hw-ascend/openeuler-sp4-jenkins-arm:latest
