@@ -1,62 +1,48 @@
-[2026/09/28 11:01:32.394 GMT+08:00] [INFO] [BUILD:wait_job_depends] : This step is start
-[2026/09/28 11:01:32.400 GMT+08:00] [INFO] [BUILD:wait_job_depends] : plugin version is :1.1.9
-[2026/09/28 11:01:32.430 GMT+08:00] [INFO] [BUILD:wait_job_depends] : No dependent build jobs!
-[2026/09/28 11:01:32.430 GMT+08:00] [INFO] [BUILD:wait_job_depends] : This step is complete
-[2026/09/28 11:01:32.460 GMT+08:00] [INFO] [BUILD:build_execute] : This step is start
-[2026/09/28 11:01:32.468 GMT+08:00] [INFO] [BUILD:build_execute] : plugin version is :1.3.11.28
-[2026/09/28 11:01:32.468 GMT+08:00] [INFO] [BUILD:build_execute] : input json :{"isCheck":false,"next3rd":false,"scmRelativeTargetDir":"build_project","language":"zh-cn","script":"today_Timestamp=$(date +%Y%m)\nhisi_Timestamp=$(curl \"http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}?op=LISTSTATUS&user.name=hadoop\" | grep -Eo \"[0-9]{8}_[0-9]{9}_newest\" | grep $(date +%Y%m%d)_00 | tail -n1)\necho \"[INFO]: hisi_Timestamp is ${hisi_Timestamp}\"\naarch_package_name=$(curl \"http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}?op=LISTSTATUS&user.name=hadoop\" | grep -oE \"cann-bisheng-compiler_[^-]*_linux-aarch64\\.run\" | tail -n1)\nx86_package_name=$(curl \"http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}?op=LISTSTATUS&user.name=hadoop\" | grep -oE \"cann-bisheng-compiler_[^-]*_linux-x86_64\\.run\" | tail -n1)\nif [ -z \"$x86_package_name\" ] || [ -z \"$aarch_package_name\" ]; then\n    echo \"[ERROR]: run package are not in ${hisi_Timestamp}\"\n    exit 1;\nfi\nwget -nv -O ${x86_package_name} \"http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}/${x86_package_name}?op=OPEN&user.name=hadoop\"\nwget -nv -O ${aarch_package_name} \"http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}/${aarch_package_name}?op=OPEN&user.name=hadoop\"\nupload_dir=$(echo ${hisi_Timestamp} | sed 's/_newest//' | sed 's/_//')\nmkdir -p ***//output/${upload_dir}\ncp -r *.run ***//output/${upload_dir}/\n"}
-[2026/09/28 11:01:32.468 GMT+08:00] [INFO] [BUILD:build_execute] : []
-[2026/09/28 11:01:32.468 GMT+08:00] [INFO] [BUILD:build_execute] : aiEnable: false
-[2026/09/28 11:01:32.468 GMT+08:00] [INFO] [BUILD:build_execute] : command:today_Timestamp=$(date +%Y%m)hisi_Timestamp=$(curl "http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}?op=LISTSTATUS&user.name=hadoop" | grep -Eo "[0-9]{8}_[0-9]{9}_newest" | grep $(date +%Y%m%d)_00 | tail -n1)echo "[INFO]: hisi_Timestamp is ${hisi_Timestamp}"aarch_package_name=$(curl "http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}?op=LISTSTATUS&user.name=hadoop" | grep -oE "cann-bisheng-compiler_[^-]*_linux-aarch64\.run" | tail -n1)x86_package_name=$(curl "http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}?op=LISTSTATUS&user.name=hadoop" | grep -oE "cann-bisheng-compiler_[^-]*_linux-x86_64\.run" | tail -n1)if [ -z "$x86_package_name" ] || [ -z "$aarch_package_name" ]; then    echo "[ERROR]: run package are not in ${hisi_Timestamp}"    exit 1;fiwget -nv -O ${x86_package_name} "http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}/${x86_package_name}?op=OPEN&user.name=hadoop"wget -nv -O ${aarch_package_name} "http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/${today_Timestamp}/${hisi_Timestamp}/${aarch_package_name}?op=OPEN&user.name=hadoop"upload_dir=$(echo ${hisi_Timestamp} | sed 's/_newest//' | sed 's/_//')mkdir -p ***//output/${upload_dir}cp -r *.run ***//output/${upload_dir}/
-[2026/09/28 11:01:32.469 GMT+08:00] [INFO] [BUILD:build_execute] : start run shell command
-[2026/09/28 11:01:32.469 GMT+08:00] [INFO] [BUILD:build_execute] : launching task in ***/ on besd-0928-7vworkeea794fdfw
-[2026/09/28 11:01:32.495 GMT+08:00] [INFO] [BUILD:build_execute] : launched task
-[2026/09/28 11:01:32.497 GMT+08:00] [INFO] [BUILD:build_execute] : start to get result.
-[2026/09/28 11:01:33.004 GMT+08:00] ++ date +%Y%m
-[2026/09/28 11:01:33.004 GMT+08:00] + today_Timestamp=202609
-[2026/09/28 11:01:33.004 GMT+08:00] ++ curl 'http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609?op=LISTSTATUS&user.name=hadoop'
-[2026/09/28 11:01:33.004 GMT+08:00] ++ grep -Eo '[0-9]{8}_[0-9]{9}_newest'
-[2026/09/28 11:01:33.004 GMT+08:00] ++ tail -n1
-[2026/09/28 11:01:33.004 GMT+08:00] +++ date +%Y%m%d
-[2026/09/28 11:01:33.004 GMT+08:00] ++ grep 20260928_00
-[2026/09/28 11:01:33.004 GMT+08:00]   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-[2026/09/28 11:01:33.004 GMT+08:00]                                  Dload  Upload   Total   Spent    Left  Speed
-[2026/09/28 11:01:33.004 GMT+08:00] 
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100  263k    0  263k    0     0  4867k      0 --:--:-- --:--:-- --:--:-- 4969k
-[2026/09/28 11:01:33.004 GMT+08:00] + hisi_Timestamp=20260928_000124370_newest
-[2026/09/28 11:01:33.004 GMT+08:00] + echo '[INFO]: hisi_Timestamp is 20260928_000124370_newest'
-[2026/09/28 11:01:33.004 GMT+08:00] [INFO]: hisi_Timestamp is 20260928_000124370_newest
-[2026/09/28 11:01:33.004 GMT+08:00] ++ curl 'http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609/20260928_000124370_newest?op=LISTSTATUS&user.name=hadoop'
-[2026/09/28 11:01:33.004 GMT+08:00] ++ grep -oE 'cann-bisheng-compiler_[^-]*_linux-aarch64\.run'
-[2026/09/28 11:01:33.004 GMT+08:00] ++ tail -n1
-[2026/09/28 11:01:33.004 GMT+08:00]   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-[2026/09/28 11:01:33.004 GMT+08:00]                                  Dload  Upload   Total   Spent    Left  Speed
-[2026/09/28 11:01:33.004 GMT+08:00] 
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100  633k    0  633k    0     0  7935k      0 --:--:-- --:--:-- --:--:-- 8021k
-[2026/09/28 11:01:33.004 GMT+08:00] + aarch_package_name=cann-bisheng-compiler_9.2.0_linux-aarch64.run
-[2026/09/28 11:01:33.004 GMT+08:00] ++ curl 'http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609/20260928_000124370_newest?op=LISTSTATUS&user.name=hadoop'
-[2026/09/28 11:01:33.004 GMT+08:00] ++ grep -oE 'cann-bisheng-compiler_[^-]*_linux-x86_64\.run'
-[2026/09/28 11:01:33.004 GMT+08:00] ++ tail -n1
-[2026/09/28 11:01:33.004 GMT+08:00]   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-[2026/09/28 11:01:33.004 GMT+08:00]                                  Dload  Upload   Total   Spent    Left  Speed
-[2026/09/28 11:01:33.004 GMT+08:00] 
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
-100  633k    0  633k    0     0  8605k      0 --:--:-- --:--:-- --:--:-- 8681k
-[2026/09/28 11:01:33.004 GMT+08:00] + x86_package_name=cann-bisheng-compiler_9.2.0_linux-x86_64.run
-[2026/09/28 11:01:33.004 GMT+08:00] + '[' -z cann-bisheng-compiler_9.2.0_linux-x86_64.run ']'
-[2026/09/28 11:01:33.004 GMT+08:00] + '[' -z cann-bisheng-compiler_9.2.0_linux-aarch64.run ']'
-[2026/09/28 11:01:33.004 GMT+08:00] + wget -nv -O cann-bisheng-compiler_9.2.0_linux-x86_64.run 'http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609/20260928_000124370_newest/cann-bisheng-compiler_9.2.0_linux-x86_64.run?op=OPEN&user.name=hadoop'
-[2026/09/28 11:01:34.899 GMT+08:00] 2026-09-28 11:01:34 URL:http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609/20260928_000124370_newest/cann-bisheng-compiler_9.2.0_linux-x86_64.run?op=OPEN&user.name=hadoop [272717812] -> "cann-bisheng-compiler_9.2.0_linux-x86_64.run" [1]
-[2026/09/28 11:01:34.899 GMT+08:00] + wget -nv -O cann-bisheng-compiler_9.2.0_linux-aarch64.run 'http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609/20260928_000124370_newest/cann-bisheng-compiler_9.2.0_linux-aarch64.run?op=OPEN&user.name=hadoop'
-[2026/09/28 11:01:36.767 GMT+08:00] 2026-09-28 11:01:36 URL:http://hdfs-ngx0.turing-ci.hisilicon.com:14000/webhdfs/v1/compilepackage/CI_Version/cann_eco/br_milan_torino_v100r001c12_main/202609/20260928_000124370_newest/cann-bisheng-compiler_9.2.0_linux-aarch64.run?op=OPEN&user.name=hadoop [273980578] -> "cann-bisheng-compiler_9.2.0_linux-aarch64.run" [1]
-[2026/09/28 11:01:36.767 GMT+08:00] ++ echo 20260928_000124370_newest
-[2026/09/28 11:01:36.767 GMT+08:00] ++ sed s/_newest//
-[2026/09/28 11:01:36.767 GMT+08:00] ++ sed s/_//
-[2026/09/28 11:01:36.767 GMT+08:00] + upload_dir=20260928000124370
-[2026/09/28 11:01:36.767 GMT+08:00] + mkdir -p ***//output/20260928000124370
-[2026/09/28 11:01:36.767 GMT+08:00] + cp -r cann-bisheng-compiler_9.2.0_linux-aarch64.run cann-bisheng-compiler_9.2.0_linux-x86_64.run ***//output/20260928000124370/
-[2026/09/28 11:01:37.290 GMT+08:00] [INFO] [BUILD:build_execute] : run command success
-[2026/09/28 11:01:37.293 GMT+08:00] [INFO] [BUILD:build_execute] : end to get result.
-[2026/09/28 11:01:37.293 GMT+08:00] [INFO] [BUILD:build_execute] : This step is complete
+有两种办法，建议先试第一种（快），不行再用第二种（保底）。
+方法一：分享链接（最快）
+把这一整行复制到 Windows 那台机器上：
+vless://c9749809-86bb-4696-8b5b-8e2eafc83acf@64.176.54.179:443?encryption=none&flow=xtls-rprx-vision&security=reality&sni=www.yahoo.co.jp&fp=chrome&pbk=TycXeln2m4IseXYKyQYywDGN9X0oD6I4HMb2ROAxNRI&sid=028bf357c57b9cfa&type=tcp#Vultr-JP
+在 Windows 的 Clash Verge 里：订阅页 → 把链接粘进"订阅文件链接"那个框 → 看"导入"按钮是否变亮 → 点导入。如果它认这个格式，会直接生成一个配置，然后你到「代理」页选中它就行。
+你的 Clash Verge 版本如果不认分享链接（那个框只接受订阅 URL），就走方法二。
+方法二：新建本地配置（一定能成）
+1. Clash Verge → 订阅 → 右上角 新建
+2. 名称填 jp，类型选「本地 / Local」（不是远程 Remote，那个才要填订阅链接）
+3. 创建后选中它 → 点右侧 「⋯」→「编辑文件」
+4. 编辑器里全选删掉，粘贴下面全部内容：
+proxies:
+  - name: Vultr-JP
+    type: vless
+    server: 64.176.54.179
+    port: 443
+    uuid: c9749809-86bb-4696-8b5b-8e2eafc83acf
+    network: tcp
+    tls: true
+    udp: true
+    flow: xtls-rprx-vision
+    servername: www.yahoo.co.jp
+    client-fingerprint: chrome
+    reality-opts:
+      public-key: TycXeln2m4IseXYKyQYywDGN9X0oD6I4HMb2ROAxNRI
+      short-id: 028bf357c57b9cfa
+
+proxy-groups:
+  - name: Proxy
+    type: select
+    proxies:
+      - Vultr-JP
+      - DIRECT
+
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,Proxy
+5. 保存 → 「代理」页选中 Proxy 组里的 Vultr-JP
+粘贴后检查一行：servername: www.yahoo.co.jp 必须是干净的域名。有些聊天/输入法会把域名自动变成 [www.yahoo.co.jp](http://...) 这种链接形式——你这台 Mac 上就踩过一次这个坑，如果变成那样，手动改回来。
+然后两步收尾
+打开系统代理：Clash Verge 首页 → 网络设置 → 系统代理 → 打开。
+验证：Windows 浏览器访问 ip.sb，出口 IP 显示 64.176.54.179 就成了。
+两点提醒
+Windows 那台默认会全局走这个节点。 我给的规则是"国内 IP 直连、其余走代理"，日常够用。如果那台机器也想用你的机场订阅享受优化线路，就把机场订阅也加上，再用跟 Mac 上一样的办法（扩展脚本）把自建节点合并进去、做兜底——需要的话我再帮你写一份 Windows 版的。
+这段配置里含你的节点密钥，等于一条通道的钥匙。别发到群里或贴到公开地方，用微信/邮件发给自己那台机器就行。
+
+
+2:20
