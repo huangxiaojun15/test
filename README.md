@@ -1,4 +1,4 @@
-[1](https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0+dev20260923230212-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl)
+[[1](https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0+dev20260923230212-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl)
 triton-ascend
 https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/cann_shmem-1.6.0-cp310-cp310-linux_aarch64.whl
 https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/cann_shmem-1.6.0-cp310-cp310-linux_x86_64.whl
@@ -15,4 +15,19 @@ https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/202609
 https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/triton_ascend-3.6.0+dev20260918000216-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
 https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/triton_ascend-3.6.0+dev20260918000216-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
 https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/triton_ascend-3.6.0+dev20260918000216-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
-https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/triton_ascend-3.6.0+dev20260918000216-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260918000216/triton_ascend-3.6.0+dev20260918000216-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl](https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp310-cp310-linux_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp310-cp310-linux_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp311-cp311-linux_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp311-cp311-linux_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp312-cp312-linux_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp312-cp312-linux_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp313-cp313-linux_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/cann_shmem-1.6.0-cp313-cp313-linux_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp310-cp310-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp311-cp311-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp311-cp311-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp313-cp313-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
+https://ascend-triton-open.obs.cn-north-4.myhuaweicloud.com/triton-ascend/20260923230212/triton_ascend-3.6.0%2Bdev20260923230212-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl)
