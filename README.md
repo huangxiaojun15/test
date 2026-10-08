@@ -23,3 +23,4 @@ function conf_triton_ascend_code()
     tar -zxvf ascendnpu-ir_2.0.0_linux-${arch_r}.tar.gz -C npuir
     cp -r ./npuir/ "${triton_ascend_path_r}"/third_party/ascend/backend/bishengir/
 }
+https://sglang-npu.obs.cn-southwest-2.myhuaweicloud.com/Triton-ascend/3.2.2/triton_ascend-3.2.2-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
