@@ -27,3 +27,7 @@ https://sglang-npu.obs.cn-southwest-2.myhuaweicloud.com/Triton-ascend/3.2.2/trit
 https://github.com/sgl-project/sglang/actions/runs/37763674480/job/113266013690
 
 不行，还是报没有triton
+
+
+https://obs-memfabric-hybrid.obs.cn-north-4.myhuaweicloud.com/memcache/mc_version.json
+https://obs-memfabric-hybrid.obs.cn-north-4.myhuaweicloud.com/mf/mf_version.json
