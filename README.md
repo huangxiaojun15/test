@@ -24,3 +24,6 @@ function conf_triton_ascend_code()
     cp -r ./npuir/ "${triton_ascend_path_r}"/third_party/ascend/backend/bishengir/
 }
 https://sglang-npu.obs.cn-southwest-2.myhuaweicloud.com/Triton-ascend/3.2.2/triton_ascend-3.2.2-cp312-cp312-manylinux_2_27_aarch64.manylinux_2_28_aarch64.whl
+https://github.com/sgl-project/sglang/actions/runs/37763674480/job/113266013690
+
+不行，还是报没有triton
