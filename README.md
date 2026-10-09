@@ -9,3 +9,6 @@ docker logs sgl-yzy-cann9.1 2>&1 | tail -30
 status=exited exit=136 oom=false started=2026-10-09T06:46:53.496874495Z finished=2026-10-09T06:46:53.543943062Z err= entrypoint=[bash] cmd=[]
 [root@localhost y30082119]# docker logs sgl-yzy-cann9.1 2>&1 | tail -30
 [root@localhost y30082119]# 
+https://www.hiascend.com/cann/download?versionId=800&ids=d806%2Ch0501%2Ch0601%2Ch0703&currentTab=1
+
+https://www.hiascend.com/cann/download?versionId=800&ids=d806%2Ch0501%2Ch0601%2Ch0703&currentTab=1
