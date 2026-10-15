@@ -7,3 +7,5 @@ https://github.com/Ascend/cann-container-image/blob/main/cann/9.1.0-910-ubuntu22
 https://124.70.105.69:51001/jenkins/job/Triton/job/triton_operater_test/
 [https://github.com/Ascend/sglang/actions/runs/32610852063/job/97123580031]
 export ENV_DEPLOY_SECRET_KEY=zhanlu_simulation_c34f7c
+https://obs-memfabric-hybrid.obs.cn-north-4.myhuaweicloud.com/memcache/mc_version.json
+https://obs-memfabric-hybrid.obs.cn-north-4.myhuaweicloud.com/mf/mf_version.json
