@@ -4,3 +4,4 @@ bash csrc/build_batch_invariant_ops.sh ascend950
 https://github.com/Ascend/cann-container-image/blob/main/cann/9.1.0-910-ubuntu22.04-py3.12/Dockerfile
 https://ci.openeuler.openatom.cn/job/multiarch/job/manual-jobs/job/openeuler/job/UBSCore
 
+ae935b0f5215458f9a763bb8c2e74c24
