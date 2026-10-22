@@ -1,22 +1,43 @@
-https://gitcode.com/lisong_hw/ubs-engine/tree/ut-fix-mockcpp
-https://124.70.105.69:51001/jenkins/job/BeiMingTest/job/daily_test/job/Deploy_Test_ubs_mem/29/consoleFull
-bash csrc/build_batch_invariant_ops.sh ascend950
-https://github.com/Ascend/cann-container-image/blob/main/cann/9.1.0-910-ubuntu22.04-py3.12/Dockerfile
-https://ci.openeuler.openatom.cn/job/multiarch/job/manual-jobs/job/openeuler/job/UBSCore
+IMAGE="swr.cn-southwest-2.myhuaweicloud.com/base_image/dockerhub/lmsysorg/sglang:nightly-cann9.2.0-950"
 
-
-(base) [root@localhost ~]# docker exec -it fb5eaa0f7038634c385c33dd7ba9e21da608342d82642fc133d676173d67cdc8 bash
-root@localhost:/workspace# NPU_SMI_BIN="$(command -v npu-smi)" echo "$NPU_SMI_BIN" ldd "$NPU_SMI_BIN"
- ldd 
-root@localhost:/workspace# find /usr/local /usr/lib64 /lib64 -name 'liburma.so*' -ls 2>/dev/null
-133434300    260 -rwxr-xr-x   1 root     root       264576 Sep 28 04:53 /usr/lib64/liburma.so.0.0.3
-133439729      0 lrwxrwxrwx   1 root     root           12 Sep 28 04:53 /usr/lib64/liburma.so -> liburma.so.0
-133434299      0 lrwxrwxrwx   1 root     root           16 Sep 28 04:53 /usr/lib64/liburma.so.0 -> liburma.so.0.0.3
-133434300    260 -rwxr-xr-x   1 root     root       264576 Sep 28 04:53 /lib64/liburma.so.0.0.3
-133439729      0 lrwxrwxrwx   1 root     root           12 Sep 28 04:53 /lib64/liburma.so -> liburma.so.0
-133434299      0 lrwxrwxrwx   1 root     root           16 Sep 28 04:53 /lib64/liburma.so.0 -> liburma.so.0.0.3
-root@localhost:/workspace# 
-root@localhost:/workspace# 
-root@localhost:/workspace# ldconfig -p | grep -E 'urma|dcmi'
-root@localhost:/workspace# 
+docker run \
+    --runtime=runc \
+    -u root \
+    -it -d \
+    --name sglang-hxj \
+    --net=host \
+    --privileged=true \
+    --shm-size=2g \
+    --device=/dev/davinci_manager \
+    --device=/dev/hisi_hdc \
+    --device=/dev/ummu \
+    --device=/dev/uburma \
+    --device=/dev/davinci0 \
+    --device=/dev/davinci1 \
+    --device=/dev/davinci2 \
+    --device=/dev/davinci3 \
+    --device=/dev/davinci4 \
+    --device=/dev/davinci5 \
+    --device=/dev/davinci6 \
+    --device=/dev/davinci7 \
+    -v /usr/local/Ascend/driver:/usr/local/Ascend/driver \
+    -v /usr/local/Ascend/firmware:/usr/local/Ascend/firmware \
+    -v /usr/local/dcmi:/usr/local/dcmi \
+    -v /usr/local/bin/npu-smi:/usr/local/bin/npu-smi:ro \
+    -v /etc/ascend_install.info:/etc/ascend_install.info:ro \
+    -v /opt/sglang-ub-libs:/opt/sglang-ub-libs:ro \
+    -v /var/log/npu:/usr/slog \
+    -v /root/host:/root/host \
+    -v /mnt:/mnt \
+    -v /data:/data \
+    -v /home:/home \
+    -v /etc/hccl_rootinfo.json:/etc/hccl_rootinfo.json:ro \
+    -v /etc/hixlep:/etc/hixlep:ro \
+    -v /usr/lib64/liburma.so.0:/usr/local/lib/liburma.so.0 \
+    -v /usr/lib64/libummu.so.1:/usr/local/lib/libummu.so.1 \
+    -v /usr/lib64/liburma.so.0:/usr/local/lib/liburma.so.0 \
+     -v /usr/lib64/liburma_common.so.0:/usr/local/lib/liburma_common.so.0 \
+    -w /workspace \
+    --entrypoint /bin/bash \
+    "$IMAGE" -c 'exec sleep infinity
 
