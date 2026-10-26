@@ -131,3 +131,12 @@ ls -lh "$WHEEL_DIR"/*.whl
 bash build_mooncake1.sh
 
 pip install /mnt/share/c00985000/code/Mooncake/dist/mooncake_transfer_engine-0.3.12.post1-cp312-cp312-linux_aarch64.whl --force --no-deps
+
+
+327cf4e8676f4cb1838ae5485bfe16bd
+41e12e07f4fe4eae9e858e442a3476aa
+75626679c8e04083a63b8665dd299343
+a5e30550d7524a12be53d156fbe0622a
+b2dda453563542888a49fa23925ba3c4
+c4776fd69904495a8b3954cdf72ecd4a
+eef2850b3f11489d88eb21208067447a
