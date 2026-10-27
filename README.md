@@ -1,3 +1,26 @@
+
+on:
+  pr_comment:
+    types: [ created ]
+    keyword: '^(?:\/)?compile*'
+  pull_request_comment:
+    types: [created]
+    branches: [ '*' ]
+    comments: [ '^(?:\/)?compile*' ]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 name: openGauss_Plugin_PR
 
 on:
