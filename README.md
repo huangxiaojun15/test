@@ -1,21 +1,183 @@
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-a3-openeuler24.03-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-950-debian12-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-910b-openeuler24.03-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-950-ubuntu24.04-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-910b-debian12-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-910b-ubuntu24.04-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-a3-debian12-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-950-openeuler24.03-py3.11
-docker pull swr.cn-north-4.myhuaweicloud.com/opentile/triton:3.6.0-cann9.2.0-torch_npu2.10.0.post7-a3-ubuntu24.04-py3.11
+name: openGauss_Plugin_PR
 
+on:
+  push:
+    branches:
+      - master
+      - '**'
+  pull_request_target:
+    branches:
+      - master
+      - '**'
+  pull_request_comment:
+    types:
+      - created
+    branches:
+      - master
+      - '**'
+    comments:
+      - '^\s*/retest\s*$'
+  pr_comment:
+    types:
+      - created
+    keyword: '^\s*/retest\s*$'
+  workflow_dispatch:
 
-327cf4e8676f4cb1838ae5485bfe16bd
-41e12e07f4fe4eae9e858e442a3476aa
-75626679c8e04083a63b8665dd299343
-a5e30550d7524a12be53d156fbe0622a
-b2dda453563542888a49fa23925ba3c4
-c4776fd69904495a8b3954cdf72ecd4a
-eef2850b3f11489d88eb21208067447a
+permissions:
+  repository: read
+  pr: write
+  note: write
 
+env:
+  GITCODE_REPO: opengauss/Plugin
+  PLUGIN_REPO: https://gitcode.com/opengauss/Plugin.git
+  SERVER_REPO: https://gitcode.com/opengauss/openGauss-server.git
+  PRIVATE_BUILD_SCRIPT: /home/PrivateBuild_tools/Private_Main_Plugin.sh
 
-a4f33161583d48ab93cf949aab445b5a
+jobs:
+  prepare:
+    name: Mark running
+    runs-on: [self-hosted, plugin_1]
+    steps:
+      - name: Mark PR as running
+        if: ${{ atomgit.event.pull_request.number != '' }}
+        uses: openlibing/pr-label-action@v1.0.0
+        with:
+          add_labels: ci-pipeline-running
+          remove_labels: ci-pipeline-success,ci-pipeline-failed,ci-pipeline-passed
+          token: ${{secrets.PR_LABEL_TOKEN}}
+
+  compile_plugin_1:
+    name: openGauss_Plugin_Compile
+    needs: prepare
+    runs-on: [self-hosted, plugin_1]
+    timeout-minutes: 120
+    steps:
+      - name: Manual checkout source code
+        run: |
+          set -e
+          workspace="$PWD"
+          repo="${ATOMGIT_REPOSITORY:-}"
+          if [ -z "${repo}" ]; then
+            repo="${GITCODE_REPOSITORY:-}"
+          fi
+          if [ -z "${repo}" ] || ! echo "${repo}" | grep -q '/'; then
+            repo="${GITCODE_REPO:-opengauss/Plugin}"
+          fi
+          server="${ATOMGIT_SERVER_URL:-}"
+          if [ -z "${server}" ]; then
+            server="${GITCODE_SERVER_URL:-}"
+          fi
+          if [ -z "${server}" ]; then
+            server="https://gitcode.com"
+          fi
+          repo_url="${server%/}/${repo}.git"
+          ref="${ATOMGIT_REF:-}"
+          if [ -z "${ref}" ]; then
+            ref="${GITCODE_REF:-}"
+          fi
+          if [ -z "${ref}" ]; then
+            ref="refs/heads/master"
+          fi
+          sha="${ATOMGIT_SHA:-}"
+          if [ -z "${sha}" ]; then
+            sha="${GITCODE_SHA:-}"
+          fi
+          if [ -z "${sha}" ]; then
+            sha="FETCH_HEAD"
+          fi
+          echo "Manual checkout ${repo_url} ${ref} ${sha}"
+
+          mkdir -p "${workspace}"
+          cd "${workspace}"
+          if [ ! -d .git ]; then
+            git init
+          fi
+          if git remote | grep -qx origin; then
+            git remote set-url origin "${repo_url}"
+          else
+            git remote add origin "${repo_url}"
+          fi
+          git fetch --depth=1 origin "${ref}"
+          git checkout -f "${sha}" || git checkout -f FETCH_HEAD
+      - name: Run openGauss plugin compile on plugin-1
+        run: |
+          source .gitcode/scripts/resolve_gitcode_env.sh
+          bash .gitcode/scripts/plugin_compile.sh
+        env:
+          WORKSPACE_ROOT: /usr1/gauss_jenkins/jenkins/workspace1/
+          GITCODE_PR_IID: ${{ atomgit.event.pull_request.number }}
+
+  compile_plugin_2:
+    name: openGauss_Plugin_Compile_Part2
+    needs: prepare
+    runs-on: [self-hosted, docker_1]
+    timeout-minutes: 120
+    steps:
+      - name: Manual checkout source code
+        run: |
+          set -e
+          workspace="$PWD"
+          repo="${ATOMGIT_REPOSITORY:-}"
+          if [ -z "${repo}" ]; then
+            repo="${GITCODE_REPOSITORY:-}"
+          fi
+          if [ -z "${repo}" ] || ! echo "${repo}" | grep -q '/'; then
+            repo="${GITCODE_REPO:-opengauss/Plugin}"
+          fi
+          server="${ATOMGIT_SERVER_URL:-}"
+          if [ -z "${server}" ]; then
+            server="${GITCODE_SERVER_URL:-}"
+          fi
+          if [ -z "${server}" ]; then
+            server="https://gitcode.com"
+          fi
+          repo_url="${server%/}/${repo}.git"
+          ref="${ATOMGIT_REF:-}"
+          if [ -z "${ref}" ]; then
+            ref="${GITCODE_REF:-}"
+          fi
+          if [ -z "${ref}" ]; then
+            ref="refs/heads/master"
+          fi
+          sha="${ATOMGIT_SHA:-}"
+          if [ -z "${sha}" ]; then
+            sha="${GITCODE_SHA:-}"
+          fi
+          if [ -z "${sha}" ]; then
+            sha="FETCH_HEAD"
+          fi
+          echo "Manual checkout ${repo_url} ${ref} ${sha}"
+
+          mkdir -p "${workspace}"
+          cd "${workspace}"
+          if [ ! -d .git ]; then
+            git init
+          fi
+          if git remote | grep -qx origin; then
+            git remote set-url origin "${repo_url}"
+          else
+            git remote add origin "${repo_url}"
+          fi
+          git fetch --depth=1 origin "${ref}"
+          git checkout -f "${sha}" || git checkout -f FETCH_HEAD
+      - name: Run openGauss plugin compile on docker-1
+        run: |
+          source .gitcode/scripts/resolve_gitcode_env.sh
+          bash .gitcode/scripts/plugin_compile.sh
+        env:
+          WORKSPACE_ROOT: /usr1/gauss_jenkins/jenkins/workspace/
+          GITCODE_PR_IID: ${{ atomgit.event.pull_request.number }}
+
+post:
+  jobs:
+    report_result:
+      name: Report pipeline result
+      runs-on: [self-hosted, plugin_1]
+      steps:
+        - name: Set result label
+          uses: openlibing/pr-label-action@v1.0.0
+          with:
+            add_labels: ${{ pipeline.upstream_status == 'COMPLETED' && 'ci-pipeline-success' || 'ci-pipeline-failed' }}
+            remove_labels: ci-pipeline-running,${{ pipeline.upstream_status == 'COMPLETED' && 'ci-pipeline-failed' || 'ci-pipeline-success' }}
+            token: ${{secrets.PR_LABEL_TOKEN}}
