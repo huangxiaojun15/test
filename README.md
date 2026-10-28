@@ -13,7 +13,7 @@ on:
 
 
 
-
+https://ci.openeuler.openatom.cn/
 
 
 
