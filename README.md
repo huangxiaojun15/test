@@ -17,7 +17,7 @@ https://ci.openeuler.openatom.cn/
 
 
 
-
+pip install "triton-ascend==3.6.0+dev20261027" --extra-index-url https://mirrors.huaweicloud.com/ascend/repos/pypi
 
 
 
