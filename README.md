@@ -8,7 +8,7 @@ on:
     branches: [ '*' ]
     comments: [ '^(?:\/)?compile*' ]
 
-
+https://gitcode.com/ComputingActionTest/Ascend-ci-infra/blob/master/docs/CI%E6%B5%81%E6%B0%B4%E7%BA%BF%E9%85%8D%E7%BD%AE%E6%8C%87%E5%AF%BC.md#22-pre-commit
 
 https://github.com/triton-lang/triton-ascend/pull/2845/changes#diff-216a870014af23d0cdf569e8889aca88517a2d7b4e2dd31345a9ac65d63d6ef3
 
