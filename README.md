@@ -15,7 +15,7 @@ https://github.com/triton-lang/triton-ascend/pull/2845/changes#diff-216a870014af
 
 https://ci.openeuler.openatom.cn/
 
-
+https://github.com/kvcache-ai/Mooncake/releases/download/v0.3.14/mooncake_transfer_engine-0.3.14-cp310-cp310-manylinux_2_28_aarch64.whl
 
 pip install "triton-ascend==3.6.0+dev20261027" --extra-index-url https://mirrors.huaweicloud.com/ascend/repos/pypi
 
