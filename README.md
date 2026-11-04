@@ -12,7 +12,7 @@ https://gitcode.com/ComputingActionTest/Ascend-ci-infra/blob/master/docs/CI%E6%B
 
 https://github.com/triton-lang/triton-ascend/pull/2845/changes#diff-216a870014af23d0cdf569e8889aca88517a2d7b4e2dd31345a9ac65d63d6ef3
 
-
+https://github.com/kvcache-ai/Mooncake/releases/download/v0.3.14/mooncake_transfer_engine-0.3.14-cp312-cp312-manylinux_2_28_aarch64.whl
 https://ci.openeuler.openatom.cn/
 
 https://github.com/kvcache-ai/Mooncake/releases/download/v0.3.14/mooncake_transfer_engine-0.3.14-cp310-cp310-manylinux_2_28_aarch64.whl
