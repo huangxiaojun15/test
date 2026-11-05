@@ -19,7 +19,7 @@ https://github.com/kvcache-ai/Mooncake/releases/download/v0.3.14/mooncake_transf
 
 pip install "triton-ascend==3.6.0+dev20261027" --extra-index-url https://mirrors.huaweicloud.com/ascend/repos/pypi
 
-
+https://github.com/kvcache-ai/Mooncake/releases/download/v0.3.14/mooncake_transfer_engine_memfabric-0.3.14-cp312-cp312-manylinux_2_35_aarch64.whl
 
 name: openGauss_Plugin_PR
 
