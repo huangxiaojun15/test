@@ -1,8 +1,7 @@
-git config --global user.email "local@example.com"
-git config --global user.name "local"
-git clone -b ${tbranch} https://gitcode.com/openeuler/${repo}.git "${repo}"
-cd "${repo}"
-git fetch origin refs/merge-requests/${prid}/head:pr_${prid} || git fetch origin refs/pull/${prid}/head:pr_${prid}
+https://ci.openeuler.openatom.cn/job/multiarch/job/manual-jobs/job/openeuler/job/UBSCore/job/DT/job/ubs-io/configure
+
+
+
 if [ $? -ne 0 ]; then
     echo "PR not found!"
     exit 1
