@@ -1,6 +1,6 @@
 https://ci.openeuler.openatom.cn/job/multiarch/job/manual-jobs/job/openeuler/job/UBSCore/job/DT/job/ubs-io/configure
 
-
+https://gitcode.com/BeiMing_Dev/build_dependency
 
 if [ $? -ne 0 ]; then
     echo "PR not found!"
