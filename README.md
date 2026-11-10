@@ -1,5 +1,5 @@
 https://ci.openeuler.openatom.cn/job/multiarch/job/manual-jobs/job/openeuler/job/UBSCore/job/DT/job/ubs-io/configure
-
+836ccad21e8a811858fd1543896ba2f1b932be52
 https://gitcode.com/BeiMing_Dev/build_dependency
 
 if [ $? -ne 0 ]; then
