@@ -53,3 +53,9 @@ fi
 
 cd ${WORKSPACE}/ubs-io/ubsio-boostio/test/llt/
 sh run_dt.sh
+
+
+通过网盘分享的文件：obmm.ko等2个文件 链接: https://pan.baidu.com/s/1GGMBKfGqxaupHmiNR5n6yQ?pwd=2000 提取码: 2000
+
+个人仓kernel，包含编译好的obmm.ko
+https://atomgit.com/gao-tianxiong/kernel-gtx/tree/feat/obmm-unified-switch-split-v4
