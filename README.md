@@ -9,7 +9,7 @@ fi
 git merge --no-edit --allow-unrelated-histories pr_${prid}
 cd ..
 whoami
-
+https://github.com/sgl-project/sglang/actions/runs/42941580795/job/130264746936?pr=47879
 uname -a
 cat /etc/os-release
 
