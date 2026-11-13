@@ -25,3 +25,4 @@ $ ./run.sh
 Using your self-hosted runner
 # Use this YAML in your workflow file for each job
 runs-on: self-hosted
+WF6ebeq1rbe+pC4PD%ecJpI/
