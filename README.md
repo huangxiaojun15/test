@@ -1,70 +1,27 @@
-https://www.openlibing.com/apps/nightlyPipelineDashboard?projectId=300130
-
-ADNUA6CGSSH5E2GCD4P2BODK63FXO
-
-WF6ebeq1rbe+pC4PD%ecJpI/
-
-
-
-
-https://ci.openeuler.openatom.cn/job/multiarch/job/manual-jobs/job/openeuler/job/UBSCore/job/DT/job/ubs-io/configure
-836ccad21e8a811858fd1543896ba2f1b932be52
-https://gitcode.com/BeiMing_Dev/build_dependency
-
-if [ $? -ne 0 ]; then
-    echo "PR not found!"
-    exit 1
-fi
-git merge --no-edit --allow-unrelated-histories pr_${prid}
-cd ..
-whoami
-https://github.com/sgl-project/sglang/actions/runs/42941580795/job/130264746936?pr=47879
-uname -a
-cat /etc/os-release
-
-sudo pip3 config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple
-sudo pip3 config set global.timeout 120
-
-sudo yum install -y python3 
-sudo yum install -y python3-pip
-sudo yum install -y python3-devel
-sudo yum install -y pybind11-devel 
-sudo pip install wheel -i https://repo.huaweicloud.com/repository/pypi/simple --trusted-host repo.huaweicloud.com --timeout 120
-sudo yum install -y gcc
-sudo yum install -y gcc-c++
-sudo yum install -y make
-sudo yum install -y cmake
-sudo yum install -y maven
-sudo yum install -y hostname
-sudo yum install -y fuse-devel
-sudo yum install -y automake
-sudo yum install -y librados-devel
-sudo yum install -y libaio-devel
-sudo yum install -y libtool
-sudo yum install -y numactl-devel
-sudo yum install -y libcurl-devel
-sudo yum install -y libboundscheck
-sudo yum install -y rdma-core-devel
-sudo yum install -y openssl
-sudo yum install -y openssl-devel
-sudo yum install -y dos2unix
-sudo yum install -y liburing
-sudo yum install -y liburing-devel
-
-sudo pip3 install pybind11 -i https://repo.huaweicloud.com/repository/pypi/simple --trusted-host repo.huaweicloud.com --timeout 120
-
-find /usr -name "libssl.so*"
-
-if [ "${tbranch}" == "develop" ];then
-	cd ${WORKSPACE}/ubs-io/ubsio-kv/test/llt/
-	sh run_dt.sh
-fi
-
-cd ${WORKSPACE}/ubs-io/ubsio-boostio/test/llt/
-sh run_dt.sh
-
-
-通过网盘分享的文件：obmm.ko等2个文件 链接: https://pan.baidu.com/s/1GGMBKfGqxaupHmiNR5n6yQ?pwd=2000 提取码: 2000
-
-个人仓kernel，包含编译好的obmm.ko
-https://atomgit.com/gao-tianxiong/kernel-gtx/tree/feat/obmm-unified-switch-split-v4
+Download
+# Create a folder
+$ mkdir actions-runner && cd actions-runner# Download the latest runner package
+$ curl -o actions-runner-linux-x64-2.338.2.tar.gz -L https://github.com/actions/runner/releases/download/v2.338.2/actions-runner-linux-x64-2.338.2.tar.gz# Optional: Validate the hash
+$ echo "baebf204307bac6193480852732f0aba2ae97b6c5597c244f4d5558390147c40  actions-runner-linux-x64-2.338.2.tar.gz" | shasum -a 256 -c# Extract the installer
+$ tar xzf ./actions-runner-linux-x64-2.338.2.tar.gz
+Configure
+# Create the runner and start the configuration experience
+$ ./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6CGSSH5E2GCD4P2BODK63FXO# Last step, run it!
+$ ./run.sh
+Using your self-hosted runner
+# Use this YAML in your workflow file for each job
+runs-on: self-hosted
+x86
+Download
+# Create a folder
+$ mkdir actions-runner && cd actions-runner# Download the latest runner package
+$ curl -o actions-runner-linux-arm64-2.338.2.tar.gz -L https://github.com/actions/runner/releases/download/v2.338.2/actions-runner-linux-arm64-2.338.2.tar.gz# Optional: Validate the hash
+$ echo "670adb2f268fe21dcbb58b3db0e0aa9d5b3bddfe2c651481336e561ff86de945  actions-runner-linux-arm64-2.338.2.tar.gz" | shasum -a 256 -c# Extract the installer
+$ tar xzf ./actions-runner-linux-arm64-2.338.2.tar.gz
+Configure
+# Create the runner and start the configuration experience
+$ ./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6CGSSH5E2GCD4P2BODK63FXO# Last step, run it!
+$ ./run.sh
+Using your self-hosted runner
+# Use this YAML in your workflow file for each job
+runs-on: self-hosted
