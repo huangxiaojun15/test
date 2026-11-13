@@ -26,3 +26,4 @@ Using your self-hosted runner
 # Use this YAML in your workflow file for each job
 runs-on: self-hosted
 WF6ebeq1rbe+pC4PD%ecJpI/
+./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6ENMG7BCTQI4RYYMUDK63VUG
