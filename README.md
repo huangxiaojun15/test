@@ -27,12 +27,4 @@ Using your self-hosted runner
 runs-on: self-hosted
 WF6ebeq1rbe+pC4PD%ecJpI/
 ./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6ENMG7BCTQI4RYYMUDK63VUG
-ecs-for-sglang-ci-arm-0004	172.16.0.145					
-ecs-for-sglang-ci-arm-0002	172.16.0.100					
-ecs-for-sglang-ci-arm-0001	172.16.0.113					
-ecs-for-sglang-ci-arm-0003	172.16.0.162					
-ecs-for-sglang-ci-arm-0005	172.16.0.177					
-ecs-for-sglang-ci-0001	172.16.0.135	101.44.96.123:30135	root	WF6ebeq1rbe+pC4PD%ecJpI/		
-ecs-for-sglang-ci-0004	172.16.0.172					
-ecs-for-sglang-ci-0003	172.16.0.4					
-ecs-for-sglang-ci-0002	172.16.0.229		
+	
