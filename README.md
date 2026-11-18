@@ -28,3 +28,7 @@ runs-on: self-hosted
 WF6ebeq1rbe+pC4PD%ecJpI/
 ./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6ENMG7BCTQI4RYYMUDK63VUG
 	
+ecs-for-sglang-ci-arm-0004	192.168.0.207   roo			
+ecs-for-sglang-ci-arm-0002	192.168.0.203	root				
+ecs-for-sglang-ci-arm-0001	192.168.0.2	root	166.108.200.110：30002			
+ecs-for-sglang-ci-arm-0003	192.168.0.142   root	
