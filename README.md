@@ -28,8 +28,10 @@ runs-on: self-hosted
 WF6ebeq1rbe+pC4PD%ecJpI/
 ./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6ENMG7BCTQI4RYYMUDK63VUG
 	
-ecs-for-sglang-ci-arm-0004	192.168.0.207   roo			
-ecs-for-sglang-ci-arm-0002	192.168.0.203	root				
-ecs-for-sglang-ci-arm-0001	192.168.0.2	root	166.108.200.110：30002			
-ecs-for-sglang-ci-arm-0003	192.168.0.142   root	
-./config.sh --url https://github.com/sgl-project/sgl-kernel-npu --token ADNUA6D67ML52OGENCJ2P7TK7VO2A
+root@0128bf138062:/# find /usr/local/Ascend -iname "libascend_hal.so" -print
+/usr/local/Ascend/cann-9.2.0/x86_64-linux/simulator/dav_3510/camodel/libascend_hal.so
+/usr/local/Ascend/cann-9.2.0/x86_64-linux/lib64/device/lib64/libascend_hal.so
+/usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/linux/x86_64/libascend_hal.so
+/usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/linux/aarch64/libascend_hal.so
+/usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/device/libascend_hal.so
+/usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/libascend_hal.so
