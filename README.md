@@ -35,3 +35,6 @@ root@0128bf138062:/# find /usr/local/Ascend -iname "libascend_hal.so" -print
 /usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/linux/aarch64/libascend_hal.so
 /usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/device/libascend_hal.so
 /usr/local/Ascend/cann-9.2.0/x86_64-linux/devlib/libascend_hal.so
+
+
+pip install memfabric-hybrid==1.5.0.dev20261119 --trusted-host ascend.devcloud.huaweicloud.com -i https://ascend.devcloud.huaweicloud.com/pypi/simple
