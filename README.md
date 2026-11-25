@@ -42,3 +42,5 @@ swr.cn-southwest-2.myhuaweicloud.com/base_image/ascend-ci/cann/cann
 
 pip install memfabric-hybrid==1.5.0.dev20261123 -i https://mirrors.huaweicloud.com/ascend/repos/pypi/nightly/
 https://ascend.devcloud.huaweicloud.com/artifactory/ascend-pypi/nightly/memfabric-hybrid/
+
+https://github.com/sgl-project/sglang/actions/runs/45542499978/job/138966232133?pr=51818
