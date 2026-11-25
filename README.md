@@ -44,3 +44,7 @@ pip install memfabric-hybrid==1.5.0.dev20261123 -i https://mirrors.huaweicloud.c
 https://ascend.devcloud.huaweicloud.com/artifactory/ascend-pypi/nightly/memfabric-hybrid/
 
 https://github.com/sgl-project/sglang/actions/runs/45542499978/job/138966232133?pr=51818
+
+
+https://www.openlibing.com/apps/pipelineDetail?pipelineId=1ad710b304574f0f967c2c24c15eff03&projectId=4
+https://www.openlibing.com/apps/pipelineDetail?pipelineId=ba10eb239aab4b14a59cf33f282c3ced&projectId=300057
